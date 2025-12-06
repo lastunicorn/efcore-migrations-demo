@@ -1,4 +1,5 @@
 ﻿using DustIntheWind.EfCoreMigrationsDemo.DataAccess;
+using DustIntheWind.EfCoreMigrationsDemo.Domain;
 
 namespace DustIntheWind.EfCoreMigrationsDemo;
 

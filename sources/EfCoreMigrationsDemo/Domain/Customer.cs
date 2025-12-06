@@ -1,4 +1,4 @@
-﻿namespace DustIntheWind.EfCoreMigrationsDemo.DataAccess;
+﻿namespace DustIntheWind.EfCoreMigrationsDemo.Domain;
 
 internal class Customer
 {

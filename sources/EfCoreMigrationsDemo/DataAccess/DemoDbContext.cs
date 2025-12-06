@@ -1,4 +1,5 @@
 ﻿using DustIntheWind.EfCoreMigrationsDemo.DataAccess.EntityConfigurations;
+using DustIntheWind.EfCoreMigrationsDemo.Domain;
 using Microsoft.EntityFrameworkCore;
 
 namespace DustIntheWind.EfCoreMigrationsDemo.DataAccess;
