@@ -11,9 +11,8 @@ internal class OrderTypeConfiguration : IEntityTypeConfiguration<Order>
         builder.HasKey(x => x.Id);
 
         builder
-            .Property(x => x.ProductName)
-            .IsRequired()
-            .HasMaxLength(200);
+            .Property(x => x.Date)
+            .IsRequired();
 
         builder
             .HasOne(x => x.Customer)

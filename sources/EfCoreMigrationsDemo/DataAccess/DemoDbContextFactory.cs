@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
-using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace DustIntheWind.EfCoreMigrationsDemo.DataAccess;
 
@@ -8,15 +8,10 @@ internal class DemoDbContextFactory : IDesignTimeDbContextFactory<DemoDbContext>
 {
     public DemoDbContext CreateDbContext(string[] args)
     {
-        IConfiguration configuration = new ConfigurationBuilder()
-            .AddJsonFile("appsettings.json")
-            .Build();
+        ServiceCollection serviceCollection = new();
+        Setup.ConfigureServices(serviceCollection);
+        IServiceProvider serviceProvider = serviceCollection.BuildServiceProvider();
 
-        string connectionString = configuration.GetConnectionString("DefaultConnection");
-
-        DbContextOptionsBuilder<DemoDbContext> optionsBuilder = new();
-        optionsBuilder.UseSqlServer(connectionString);
-
-        return new DemoDbContext(optionsBuilder.Options);
+        return serviceProvider.GetRequiredService<DemoDbContext>();
     }
 }
