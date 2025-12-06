@@ -1,4 +1,5 @@
-﻿using DustIntheWind.EfCoreMigrationsDemo.DataAccess;
+﻿using DustIntheWind.EfCoreMigrationsDemo.Business;
+using DustIntheWind.EfCoreMigrationsDemo.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -17,5 +18,6 @@ internal static class Setup
         });
 
         serviceCollection.AddTransient<CreateOrderUseCase>();
+        serviceCollection.AddTransient<GetOrdersUseCase>();
     }
 }

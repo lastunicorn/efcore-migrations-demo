@@ -1,5 +1,4 @@
-﻿using DustIntheWind.EfCoreMigrationsDemo.DataAccess.EntityConfigurations;
-using DustIntheWind.EfCoreMigrationsDemo.Domain;
+﻿using DustIntheWind.EfCoreMigrationsDemo.Domain;
 using Microsoft.EntityFrameworkCore;
 
 namespace DustIntheWind.EfCoreMigrationsDemo.DataAccess;
@@ -13,11 +12,5 @@ internal class DemoDbContext : DbContext
     public DemoDbContext(DbContextOptions<DemoDbContext> options)
         : base(options)
     {
-    }
-
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
-    {
-        modelBuilder.ApplyConfiguration(new CustomerTypeConfiguration());
-        modelBuilder.ApplyConfiguration(new OrderTypeConfiguration());
     }
 }
