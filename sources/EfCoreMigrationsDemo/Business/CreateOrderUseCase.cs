@@ -5,9 +5,6 @@ namespace DustIntheWind.EfCoreMigrationsDemo.Business;
 
 internal class CreateOrderUseCase
 {
-    private static readonly string[] firstNames = ["John", "Jane", "Michael", "Emily", "David", "Sarah"];
-    private static readonly string[] lastNames = ["Doe", "Smith", "Johnson", "Brown", "Davis", "Miller"];
-
     private readonly DemoDbContext demoDbContext;
 
     public CreateOrderUseCase(DemoDbContext demoDbContext)
@@ -17,32 +14,19 @@ internal class CreateOrderUseCase
 
     public Task ExecuteAsync()
     {
+        Customer customer = new()
+        {
+            Name = "John Doe"
+        };
+
         Order order = new()
         {
-            Date = GenerateRandomDate(),
-            Customer = CreateRandomCustomer()
+            Date = DateTime.UtcNow,
+            Customer = customer
         };
 
         _ = demoDbContext.Orders.Add(order);
 
         return demoDbContext.SaveChangesAsync();
-    }
-
-    private static DateTime GenerateRandomDate()
-    {
-        int orderDaysOld = Random.Shared.Next(100);
-
-        return DateTime.UtcNow.AddDays(-orderDaysOld);
-    }
-
-    private static Customer CreateRandomCustomer()
-    {
-        int firstnameIndex = Random.Shared.Next(firstNames.Length);
-        int lastnameIndex = Random.Shared.Next(lastNames.Length);
-
-        return new Customer()
-        {
-            Name = firstNames[firstnameIndex] + " " + lastNames[lastnameIndex]
-        };
     }
 }

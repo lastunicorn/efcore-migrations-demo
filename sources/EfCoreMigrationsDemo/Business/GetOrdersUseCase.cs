@@ -17,7 +17,6 @@ internal class GetOrdersUseCase
     {
         return demoDbContext.Orders
             .Include(x => x.Customer)
-            .OrderByDescending(x => x.Date)
             .ToList();
     }
 }

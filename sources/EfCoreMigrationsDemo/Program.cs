@@ -13,10 +13,12 @@ internal static class Program
         Setup.ConfigureServices(serviceCollection);
         IServiceProvider serviceProvider = serviceCollection.BuildServiceProvider();
 
-        // Execute use cases
+        // Create one order
 
         using (IServiceScope serviceScope = serviceProvider.CreateScope())
             await CreateOrder(serviceScope.ServiceProvider);
+
+        // Display all orders
 
         using (IServiceScope serviceScope = serviceProvider.CreateScope())
             await DisplayAllOrders(serviceScope.ServiceProvider);
@@ -52,7 +54,9 @@ internal static class Program
                 Console.WriteLine($"    - Name: {order.Customer.Name}");
             }
             else
+            {
                 Console.WriteLine("  - Customer: <null>");
+            }
 
             Console.WriteLine();
         }
