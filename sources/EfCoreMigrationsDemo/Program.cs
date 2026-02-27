@@ -5,6 +5,19 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace DustIntheWind.EfCoreMigrationsDemo;
 
+/// <summary>
+/// 00 - Initial project setup (with Entity Framework)
+/// ============================================
+/// 
+/// At this stage, we have a simple application with two use cases:
+/// - CreateOrderUseCase: creates a new order with a customer.
+/// - GetOrdersUseCase: retrieves and displays all orders with their associated customers.
+/// 
+/// The application uses Entity Framework Core for data access.
+/// 
+/// There is no logic in place to update database schema yet.
+/// The next steps will involve creating and applying migrations to set up the database schema.
+/// </summary>
 internal static class Program
 {
     private static async Task Main(string[] args)
