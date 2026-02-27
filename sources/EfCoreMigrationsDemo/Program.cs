@@ -26,26 +26,35 @@ internal static class Program
         Setup.ConfigureServices(serviceCollection);
         IServiceProvider serviceProvider = serviceCollection.BuildServiceProvider();
 
-        // Create one order
+        switch(args.FirstOrDefault())
+        {
+            case "create":
+                await CreateOrder(serviceProvider);
+                break;
 
-        using (IServiceScope serviceScope = serviceProvider.CreateScope())
-            await CreateOrder(serviceScope.ServiceProvider);
+            case "display":
+                await DisplayAllOrders(serviceProvider);
+                break;
 
-        // Display all orders
-
-        using (IServiceScope serviceScope = serviceProvider.CreateScope())
-            await DisplayAllOrders(serviceScope.ServiceProvider);
+            default:
+                Console.WriteLine("Usage: dotnet run [create|display]");
+                break;
+        }
     }
 
     private static async Task CreateOrder(IServiceProvider serviceProvider)
     {
-        CreateOrderUseCase useCase = serviceProvider.GetRequiredService<CreateOrderUseCase>();
+        using IServiceScope serviceScope = serviceProvider.CreateScope();
+
+        CreateOrderUseCase useCase = serviceScope.ServiceProvider.GetRequiredService<CreateOrderUseCase>();
         await useCase.ExecuteAsync();
     }
 
     private static async Task DisplayAllOrders(IServiceProvider serviceProvider)
     {
-        GetOrdersUseCase useCase = serviceProvider.GetRequiredService<GetOrdersUseCase>();
+        using IServiceScope serviceScope = serviceProvider.CreateScope();
+
+        GetOrdersUseCase useCase = serviceScope.ServiceProvider.GetRequiredService<GetOrdersUseCase>();
         List<Order> orders = await useCase.ExecuteAsync();
 
         DisplayOrders(orders);
