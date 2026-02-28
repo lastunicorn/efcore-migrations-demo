@@ -12,7 +12,6 @@ Shows how to make the setup for EF Core Migrations and generate/update the datab
   - Configure EF Core Migrations to create/update the database based on the domain model from C#.
   - Create an initial migration.
 
+## Turorial
 
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+- [Tutorial](/doc/tutorial/README.md)
